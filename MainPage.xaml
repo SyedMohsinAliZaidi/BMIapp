@@ -1,0 +1,73 @@
+<ContentPage
+    x:Class="BMIapp.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{DynamicResource SecondaryColor}">
+
+    <ContentPage.Resources>
+        <Color x:Key="SliderColor">#ff8000</Color>
+        <Color x:Key="TitleColor">#0080ff</Color>
+        <Color x:Key="LabelColor">#00161f</Color>
+
+        <Style x:Key="StyleLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="TextColor" Value="{StaticResource LabelColor}" />
+        </Style>
+
+        <Style
+            x:Key="TitleStyle"
+            BasedOn="{StaticResource StyleLabel}"
+            TargetType="Label">
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="Padding" Value="40" />
+        </Style>
+
+        <Style
+            x:Key="ValueStyle"
+            BasedOn="{StaticResource StyleLabel}"
+            TargetType="Label">
+            <Setter Property="FontSize" Value="Title" />
+            <Setter Property="TextColor" Value="{StaticResource LabelColor}" />
+        </Style>
+
+        <Style TargetType="Slider">
+            <Setter Property="ThumbColor" Value="{StaticResource SliderColor}" />
+            <Setter Property="MinimumTrackColor" Value="{StaticResource SliderColor}" />
+            <Setter Property="MaximumTrackColor" Value="{StaticResource SliderColor}" />
+        </Style>
+
+
+    </ContentPage.Resources>
+
+    <FlexLayout
+        Padding="40"
+        Direction="Column"
+        JustifyContent="SpaceEvenly">
+
+        <StackLayout>
+            <Label Style="{StaticResource TitleStyle}" Text="Hi! There,How Tall You are?" />
+            <Label Style="{StaticResource ValueStyle}" Text="{Binding Source={x:Reference SliderHeight}, Path=Value, StringFormat='{0:F0} cm'}" />
+            <Slider
+                x:Name="SliderHeight"
+                Maximum="240"
+                Minimum="35"
+                Value="{Binding Height}" />
+        </StackLayout>
+
+        <StackLayout>
+            <Label Style="{StaticResource TitleStyle}" Text="How Much do you weigh ?" />
+            <Label Style="{StaticResource ValueStyle}" Text="{Binding Source={x:Reference SliderWeight}, Path=Value, StringFormat='{0:F0} kg'}" />
+            <Slider
+                x:Name="SliderWeight"
+                Maximum="320"
+                Minimum="35"
+                Value="{Binding Weight}" />
+        </StackLayout>
+
+        <StackLayout>
+            <Label Style="{StaticResource StyleLabel}" Text="Your BMI is" />
+            <Label Style="{StaticResource StyleLabel}" Text="{Binding Bmi}" />
+            <Label Style="{StaticResource StyleLabel}" Text="{Binding Classification}" />
+        </StackLayout>
+    </FlexLayout>
+</ContentPage>
